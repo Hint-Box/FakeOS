@@ -1,14 +1,16 @@
 #!/usr/bin/python
 
+import sys  # Will be widely used in all the program
+import os
+
+import csv  # Used for translation system
+import urllib.request  # Used for downloading data
+
 from os.path import join as join_dirs
 from os.path import isfile as is_file
 from os.path import isdir as is_dir
 from getpass import getuser  # Used to obtain the username for the shell
-import sys  # Will be widely used in all the program
-import os
 
-import urllib.request  # Used for downloading data
-import csv  # Used for translation system
 
 user = getuser()
 
@@ -16,41 +18,47 @@ command_dict = {
     "s": "s"
 }
 
+data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
+languages_path = join_dirs(data_path, "languages.csv")
+
 # Code for translation system
-# Check if data folder exists, if it doesn't, create it
+class LoadHumanLanguage:
+    # The initialization of this class tries to find the csv file with translations
+    def __init__(self):
+        if not is_dir(data_path):
+            try:
+                os.makedirs(data_path)
+            except OSError as id:
+                print(f"Oh, no! An exception occurred. Details: {id}")
 
-def load_human_language():
-    data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
-    languages_path = join_dirs(data_path, "languages.csv")
-
-    if not is_dir(data_path):
-        try:
-            os.makedirs(data_path)
-        except OSError as id:
-            print(f"Oh, no! An exception occurred. Details: {id}")
-
-    if not is_file(languages_path):
-        print("Oh, no! We cannot find the CSV file for other languages, trying to download it...")
+        if not is_file(languages_path):
+            print("Oh, no! We cannot find the CSV file for other languages, trying to download it...")
         
-        try:
-            urllib.request.urlretrieve("https://raw.githubusercontent.com/Hint-Box/FakeOS/main/languages.csv",languages_path)
+            try:
+                urllib.request.urlretrieve("https://raw.githubusercontent.com/Hint-Box/FakeOS/main/languages.csv",languages_path)
+                print("Downloaded!")
         
-        except Exception as id:
-            print(f"Oops, we had an error while getting the file, please try\
-downloading \"https://raw.githubusercontent.com/Hint-Box/FakeOS/main/\
-languages.csv\" manually, then save it to {data_path}.")
-            print(f"Details: {id}")
+            except Exception as id:
+                print(f"Oops, we had an error while getting the file, please try\
+    downloading \"https://raw.githubusercontent.com/Hint-Box/FakeOS/main/\
+    languages.csv\" manually, then save it to {data_path}.")
+                print(f"Details: {id}")
 
-    else:
-        try:
-            with open(languages_path, "r") as t_file:
-                pass  # Code to load the CSV
-
-        except FileNotFoundError:
-            print("Oh, no! Something reallly bad happened, we cannot load the translations file and it's\
-                impossible to start the program without it, quitting...")
-            sys.exit(0)
-
+    # This function is used to obtain the translations from the csv file
+    def get_string(self, language, str_id):
+        with open(languages_path, "r") as t_file:
+            langs = csv.DictReader(t_file, delimiter=",")
+            for row in langs:
+                # Search for specified language in the csv file
+                if row["Language"] == language:
+                    # If the specified language is found, return the requested string after checking it exists
+                    if str_id in row:
+                        return row[str_id]
+                    # If requested string doesn't exist, return an error
+                    return "String not found!"
+            # If requested language doesn't exist, return an error
+            return "Language not found!"
+        
 
 def command_handler(command, *command_args):
     try:
@@ -94,7 +102,8 @@ def sys_command_handler():
 
 
 def main():
-    load_human_language()
+    l = LoadHumanLanguage()
+    # print(l.get_string("Esperanto", "welcome_msg"))
     print("\nWelcome to FakeOS!\n")
     command = input(f"{user}@FakeOS$ ")
     command_handler(command)
