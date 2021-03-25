@@ -1,4 +1,5 @@
-# Translation module, used to load the languages from the CSV file.
+# Translation module, used to load the languages from the CSV file and print
+# messages by giving the code to the show function.
 
 import urllib
 import csv
@@ -47,10 +48,9 @@ languages.csv\" and save it as {data_path}.")
             print("Couldn't find the specified language.")
             sys.exit(0)
 
-    def print_message(self, message_id):
+    def show(self, message_id):
         self.message_id = message_id
         try:
             print(self.lang[self.message_id])
         except KeyError:
             print(f'Unrecognized message id: "{message_id}"')
-
