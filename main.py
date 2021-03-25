@@ -133,15 +133,12 @@ def main():
         command = input(f"{user}@FakeOS$ ")
         command_handler(command)
 
-
 def exit_shell():
     sys.exit()
-
 
 command_dict = {
     "exit": exit_shell
 }
-
 
 if __name__ == "__main__":
     main()
