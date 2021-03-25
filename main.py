@@ -14,9 +14,6 @@ from getpass import getuser  # Used to obtain the username for the shell
 
 user = getuser()
 
-command_dict = {
-    "exit": "exit_shell"
-}
 
 data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
 languages_path = join_dirs(data_path, "languages.csv")
@@ -62,7 +59,7 @@ class LoadHumanLanguage:
 
 def command_handler(command):
     try:
-        returned_value = exec(command_dict[command] + "()")
+        returned_value = command_dict[command]()
     except (KeyError, IndexError, NameError):
         print("Sorry, we couldn't recognize that command.")
     else:
@@ -112,6 +109,11 @@ def main():
 
 def exit_shell():
     sys.exit()
+
+
+command_dict = {
+    "exit": exit_shell
+}
 
 
 if __name__ == "__main__":
