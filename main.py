@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys  # Will be widely used in all the program
 import os
+import locale
 
 import csv  # Used for translation system
 import urllib.request  # Used for downloading data
@@ -21,7 +22,8 @@ languages_path = join_dirs(data_path, "languages.csv")
 # Code for translation system
 class LoadHumanLanguage:
     # The initialization of this class tries to find the csv file with translations
-    def __init__(self):
+    def __init__(self, language):
+        self.language = language
         if not is_dir(data_path) and not is_file("languages.csv"):
             try:
                 os.makedirs(data_path)
@@ -42,13 +44,13 @@ class LoadHumanLanguage:
                 print(f"Details: {id}")
 
     # This function is used to obtain the translations from the csv file
-    def get_string(self, language, str_id):
+    def get_string(self, str_id):
         try:
             with open(languages_path, "r") as t_file:
                 langs = csv.DictReader(t_file, delimiter=",")
                 for row in langs:
                     # Search for specified language in the csv file
-                    if row["Language"] == language:
+                    if row["Language"] == self.language:
                         # If the specified language is found, return the requested string after checking it exists
                         if str_id in row:
                             return row[str_id]
@@ -61,7 +63,7 @@ class LoadHumanLanguage:
                 langs = csv.DictReader(t_file, delimiter=",")
                 for row in langs:
                     # Search for specified language in the csv file
-                    if row["Language"] == language:
+                    if row["Language"] == self.language:
                         # If the specified language is found, return the requested string after checking it exists
                         if str_id in row:
                             return row[str_id]
@@ -74,10 +76,13 @@ class LoadHumanLanguage:
 def command_handler(command):
     try:
         returned_value = command_dict[command]()
-    except (KeyError, IndexError, NameError):
-        print("Sorry, we couldn't recognize that command.")
-    else:
         return returned_value
+    except (KeyError, IndexError, NameError):
+    	try:
+    		exec(f"from apps import {command}")
+    	except ImportError:
+        	print("Sorry, we couldn't recognize that command.")
+        
 
 
 def sys_command_handler():
@@ -113,9 +118,17 @@ def sys_command_handler():
 
 
 def main():
-    l = LoadHumanLanguage()
-    # print(l.get_string("Esperanto", "welcome_msg"))
-    print("\nWelcome to FakeOS!\n")
+    # Detect default language and initialize LoadHumanLanguage class with it
+    loc = locale.getdefaultlocale()[0]
+    if loc.startswith("en"):
+        l = LoadHumanLanguage("English")
+    elif loc.startswith("es"):
+        l = LoadHumanLanguage("Spanish")
+    elif loc.startswith("eo"):
+            l = LoadHumanLanguage("Esperanto")
+    
+    print(f"\n{l.get_string('welcome_msg')}\n")
+    
     while(True):
         command = input(f"{user}@FakeOS$ ")
         command_handler(command)
