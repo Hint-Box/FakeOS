@@ -59,18 +59,8 @@ class LoadHumanLanguage:
                 # If requested language doesn't exist, return an error
                 return "Language not found!"
         except FileNotFoundError:
-            with open("languages.csv", "r") as t_file:
-                langs = csv.DictReader(t_file, delimiter=",")
-                for row in langs:
-                    # Search for specified language in the csv file
-                    if row["Language"] == self.language:
-                        # If the specified language is found, return the requested string after checking it exists
-                        if str_id in row:
-                            return row[str_id]
-                        # If requested string doesn't exist, return an error
-                        return "String not found!"
-                # If requested language doesn't exist, return an error
-                return "Language not found!"
+            print("Cannot load file")
+            sys.exit()
 
 
 def command_handler(command):
