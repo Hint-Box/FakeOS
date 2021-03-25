@@ -14,9 +14,6 @@ from getpass import getuser  # Used to obtain the username for the shell
 
 user = getuser()
 
-command_dict = {
-    "s": "s"
-}
 
 data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
 languages_path = join_dirs(data_path, "languages.csv")
@@ -33,11 +30,11 @@ class LoadHumanLanguage:
 
         if not is_file(languages_path):
             print("Oh, no! We cannot find the CSV file for other languages, trying to download it...")
-        
+
             try:
                 urllib.request.urlretrieve("https://raw.githubusercontent.com/Hint-Box/FakeOS/main/languages.csv",languages_path)
                 print("Downloaded!")
-        
+
             except Exception as id:
                 print(f"Oops, we had an error while getting the file, please try\
     downloading \"https://raw.githubusercontent.com/Hint-Box/FakeOS/main/\
@@ -58,12 +55,12 @@ class LoadHumanLanguage:
                     return "String not found!"
             # If requested language doesn't exist, return an error
             return "Language not found!"
-        
 
-def command_handler(command, *command_args):
+
+def command_handler(command):
     try:
-        returned_value = command_dict[command](*command_args)
-    except (KeyError, IndexError):
+        returned_value = command_dict[command]()
+    except (KeyError, IndexError, NameError):
         print("Sorry, we couldn't recognize that command.")
     else:
         return returned_value
@@ -105,8 +102,18 @@ def main():
     l = LoadHumanLanguage()
     # print(l.get_string("Esperanto", "welcome_msg"))
     print("\nWelcome to FakeOS!\n")
-    command = input(f"{user}@FakeOS$ ")
-    command_handler(command)
+    while(True):
+        command = input(f"{user}@FakeOS$ ")
+        command_handler(command)
+
+
+def exit_shell():
+    sys.exit()
+
+
+command_dict = {
+    "exit": exit_shell
+}
 
 
 if __name__ == "__main__":
