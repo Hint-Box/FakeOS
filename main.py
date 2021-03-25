@@ -22,13 +22,13 @@ languages_path = join_dirs(data_path, "languages.csv")
 class LoadHumanLanguage:
     # The initialization of this class tries to find the csv file with translations
     def __init__(self):
-        if not is_dir(data_path):
+        if not is_dir(data_path) and not is_file("languages.csv"):
             try:
                 os.makedirs(data_path)
             except OSError as id:
                 print(f"Oh, no! An exception occurred. Details: {id}")
 
-        if not is_file(languages_path):
+        if not is_file(languages_path) and not is_file("languages.csv"):
             print("Oh, no! We cannot find the CSV file for other languages, trying to download it...")
 
             try:
@@ -43,18 +43,32 @@ class LoadHumanLanguage:
 
     # This function is used to obtain the translations from the csv file
     def get_string(self, language, str_id):
-        with open(languages_path, "r") as t_file:
-            langs = csv.DictReader(t_file, delimiter=",")
-            for row in langs:
-                # Search for specified language in the csv file
-                if row["Language"] == language:
-                    # If the specified language is found, return the requested string after checking it exists
-                    if str_id in row:
-                        return row[str_id]
-                    # If requested string doesn't exist, return an error
-                    return "String not found!"
-            # If requested language doesn't exist, return an error
-            return "Language not found!"
+        try:
+            with open(languages_path, "r") as t_file:
+                langs = csv.DictReader(t_file, delimiter=",")
+                for row in langs:
+                    # Search for specified language in the csv file
+                    if row["Language"] == language:
+                        # If the specified language is found, return the requested string after checking it exists
+                        if str_id in row:
+                            return row[str_id]
+                        # If requested string doesn't exist, return an error
+                        return "String not found!"
+                # If requested language doesn't exist, return an error
+                return "Language not found!"
+        except FileNotFoundError:
+            with open("languages.csv", "r") as t_file:
+                langs = csv.DictReader(t_file, delimiter=",")
+                for row in langs:
+                    # Search for specified language in the csv file
+                    if row["Language"] == language:
+                        # If the specified language is found, return the requested string after checking it exists
+                        if str_id in row:
+                            return row[str_id]
+                        # If requested string doesn't exist, return an error
+                        return "String not found!"
+                # If requested language doesn't exist, return an error
+                return "Language not found!"
 
 
 def command_handler(command):
