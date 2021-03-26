@@ -18,8 +18,7 @@ import csv
 
 
 cdef class HumanLanguage:
-
-    '''Load the contents of the CSV file as a dictionary.'''
+    """Load the contents of the CSV file as a dictionary."""
 
     cdef char* desired_lang
     cdef char* data_path
