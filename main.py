@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-import sys  # Will be widely used in all the program
+import sys
 import os
 import locale
+import signal # Used to handle SIGINT
 
 import csv  # Used for translation system
 import urllib.request  # Used for downloading data
@@ -15,7 +16,6 @@ from getpass import getuser  # Used to obtain the username for the shell
 from translations import HumanLanguage
 
 user = getuser()
-
 
 data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
 languages_path = join_dirs(data_path, "languages.csv")
@@ -56,28 +56,44 @@ def sys_command_handler():
     )
     return returned_values
 
-
 def main():
-    # Detect default language and initialize LoadHumanLanguage class with it
+    # Detect default language and initialize HumanLanguage class with it
     loc = locale.getdefaultlocale()[0]
-    if loc.startswith("en"):
-        l = HumanLanguage("English", languages_path)
-    elif loc.startswith("es"):
-        l = HumanLanguage("Spanish", languages_path)
+    if loc.startswith("es"):
+        msg = HumanLanguage(b"Spanish", languages_path.encode())
     elif loc.startswith("eo"):
-        l = HumanLanguage("Esperanto", languages_path)
+        msg = HumanLanguage(b"Esperanto", languages_path.encode())
+    else:
+        msg = HumanLanguage(b"English", languages_path.encode())
+        
+	# Code to run if user presses Ctrl+C key combo
+    def signal_handler(sig, frame):
+	    try:
+		    print("\n"+msg.get('close'))
+		    sys.exit(0)
+	    except NameError:
+		    print("\nLeaving...")
+		    sys.exit(0)
+		    
+	# Listen for Ctrl+C and execute funcion above if it happens
+    signal.signal(signal.SIGINT, signal_handler)
     
-    print(f"\n{l.get('welcome_msg')}\n")
+    print(f"\n{msg.get('welcome')}, {user}!")
+    print(msg.get("version"))    
     
     while(True):
-        command = input(f"{user}@FakeOS$ ")
+        command = input(f"\n{user}@FakeOS$ ")
         command_handler(command)
 
 def exit_shell():
     sys.exit()
 
+def numguess():
+    print(msg.get("numguess_welcome"))
+
 command_dict = {
-    "exit": exit_shell
+    "exit": exit_shell,
+    "num-guess": numguess
 }
 
 if __name__ == "__main__":
