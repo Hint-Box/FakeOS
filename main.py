@@ -13,9 +13,6 @@ from getpass import getuser
 
 from translations import HumanLanguage
 
-user = getuser()
-data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
-languages_path = join_dirs(data_path, "languages.csv")
 
 def command_handler(command):
     # TO-DO: HACER EL SISTEMA DE ARGUMENTOS
@@ -54,34 +51,22 @@ def sys_command_handler():
     )
     return returned_values
 
+
 def main():
-    # Detect locale
+    user = getuser()
+
+    # Detect default language and initialize LoadHumanLanguage class with it
     syslocale = getdefaultlocale()[0][2:]
     try:
         lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
     except KeyError:
         lang = "English"  # Default language
-    
-    # Initialize HumanLanguage instance
-    msg = HumanLanguage(lang.encode(), languages_path.encode())
 
-    # Code to run if user presses Ctrl+C key combo
-    def signal_handler(sig, frame):
-	    try:
-		    print("\n"+msg.get('close'))
-		    sys.exit(0)
-	    except NameError:
-		    print("\nLeaving...")
-		    sys.exit(0)
-		    
-	  # Listen for Ctrl+C and execute funcion above if it happens
-    signal.signal(signal.SIGINT, signal_handler)
-    
-    print(f"\n{msg.get('welcome')}, {user}!")
-    print(msg.get("version"))
+    print("\n", lang.get('welcome_msg'), "\n")
 
     while(True):
         command_handler(input(f"{user}@FakeOS> "))
+
 
 command_dict = {
     "exit": sys.exit(0)
