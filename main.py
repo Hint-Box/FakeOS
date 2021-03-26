@@ -1,69 +1,28 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
-import sys  # Will be widely used in all the program
-import os
+# Main module. The commands (see the future commands.py module), menu and
+# configuration are handled here.
 
-import csv  # Used for translation system
-import urllib.request  # Used for downloading data
+from locale import getdefaultlocale
+import sys
 
 from os.path import join as join_dirs
 from os.path import isfile as is_file
 from os.path import isdir as is_dir
-from getpass import getuser  # Used to obtain the username for the shell
+from getpass import getuser
 
-
-user = getuser()
-
-
-data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
-languages_path = join_dirs(data_path, "languages.csv")
-
-# Code for translation system
-class LoadHumanLanguage:
-    # The initialization of this class tries to find the csv file with translations
-    def __init__(self):
-        if not is_dir(data_path):
-            try:
-                os.makedirs(data_path)
-            except OSError as id:
-                print(f"Oh, no! An exception occurred. Details: {id}")
-
-        if not is_file(languages_path):
-            print("Oh, no! We cannot find the CSV file for other languages, trying to download it...")
-
-            try:
-                urllib.request.urlretrieve("https://raw.githubusercontent.com/Hint-Box/FakeOS/main/languages.csv",languages_path)
-                print("Downloaded!")
-
-            except Exception as id:
-                print(f"Oops, we had an error while getting the file, please try\
-    downloading \"https://raw.githubusercontent.com/Hint-Box/FakeOS/main/\
-    languages.csv\" manually, then save it to {data_path}.")
-                print(f"Details: {id}")
-
-    # This function is used to obtain the translations from the csv file
-    def get_string(self, language, str_id):
-        with open(languages_path, "r") as t_file:
-            langs = csv.DictReader(t_file, delimiter=",")
-            for row in langs:
-                # Search for specified language in the csv file
-                if row["Language"] == language:
-                    # If the specified language is found, return the requested string after checking it exists
-                    if str_id in row:
-                        return row[str_id]
-                    # If requested string doesn't exist, return an error
-                    return "String not found!"
-            # If requested language doesn't exist, return an error
-            return "Language not found!"
+from translations import HumanLanguage
 
 
 def command_handler(command):
+    # TO-DO: HACER EL SISTEMA DE ARGUMENTOS
     try:
-        returned_value = command_dict[command]()
+        return command_dict[command]()  # Return whatever the func returned
     except (KeyError, IndexError, NameError):
-        print("Sorry, we couldn't recognize that command.")
-    else:
-        return returned_value
+        try:
+            exec(f"from apps import {command}")
+        except ImportError:
+            print("Sorry, we couldn't recognize that command.")
 
 
 def sys_command_handler():
@@ -84,37 +43,34 @@ def sys_command_handler():
     # Example: To call "ls":
     # $ python main.py -c ls -c
 
-    # OTRA NOTA: Hay que recordar que decidimos que en este rewrite, las
-    # aplicaciones estarían en archivos aparte, que deben tener una línea al
-    # principio que indique si el lenguaje usado es python o el que crearemos,
-        # por tanto, ya no pueden depender de funciones en este archivo.
-
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
-        if command in {"-c", "--command"} \
+        if command in {"-c", "--command"}
         and argv[index + 2] not in {"-c", "--command"}
     )
     return returned_values
 
 
 def main():
-    l = LoadHumanLanguage()
-    # print(l.get_string("Esperanto", "welcome_msg"))
-    print("\nWelcome to FakeOS!\n")
+    user = getuser()
+
+    # Detect default language and initialize LoadHumanLanguage class with it
+    syslocale = getdefaultlocale()[0][2:]
+    try:
+        lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
+    except KeyError:
+        lang = "English"  # Default language
+
+    print("\n", lang.get('welcome_msg'), "\n")
+
     while(True):
-        command = input(f"{user}@FakeOS$ ")
-        command_handler(command)
-
-
-def exit_shell():
-    sys.exit()
+        command_handler(input(f"{user}@FakeOS> "))
 
 
 command_dict = {
-    "exit": exit_shell
+    "exit": sys.exit(0)
 }
-
 
 if __name__ == "__main__":
     main()
