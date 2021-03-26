@@ -6,7 +6,6 @@ import locale
 
 import csv  # Used for translation system
 import urllib.request  # Used for downloading data
-from time import time
 
 from os.path import join as join_dirs
 from os.path import isfile as is_file
@@ -20,9 +19,6 @@ user = getuser()
 
 data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
 languages_path = join_dirs(data_path, "languages.csv")
-
-# Code for translation system
-
 
 def command_handler(command):
     try:
@@ -52,11 +48,6 @@ def sys_command_handler():
     # Example: To call "ls":
     # $ python main.py -c ls -c
 
-    # OTRA NOTA: Hay que recordar que decidimos que en este rewrite, las
-    # aplicaciones estarían en archivos aparte, que deben tener una línea al
-    # principio que indique si el lenguaje usado es python o el que crearemos,
-        # por tanto, ya no pueden depender de funciones en este archivo.
-
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
@@ -74,10 +65,7 @@ def main():
     elif loc.startswith("es"):
         l = HumanLanguage("Spanish", languages_path)
     elif loc.startswith("eo"):
-        a = time()
         l = HumanLanguage("Esperanto", languages_path)
-        b = time()
-        print(b-a)
     
     print(f"\n{l.get('welcome_msg')}\n")
     
