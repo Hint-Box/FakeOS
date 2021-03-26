@@ -56,7 +56,7 @@ def main():
     user = getuser()
 
     # Detect default language and initialize LoadHumanLanguage class with it
-    syslocale = getdefaultlocale()[0][2:]
+    syslocale = getdefaultlocale()[0][:2]
     try:
         lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
     except KeyError:
