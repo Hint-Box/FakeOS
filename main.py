@@ -63,14 +63,14 @@ def main():
         lang = "English"  # Default language
     msg = HumanLanguage(bytes(lang, "utf-8"))
 
-    print("\n", msg.get('welcome_msg'), "\n")
+    print("\n", msg.get("welcome"), "\n")
 
     while(True):
         command_handler(input(f"{user}@FakeOS> "))
 
 
 command_dict = {
-    "exit": sys.exit(0)
+    "exit": sys.exit
 }
 
 if __name__ == "__main__":
