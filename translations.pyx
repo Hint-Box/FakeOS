@@ -1,16 +1,25 @@
 # Translation module, used to load the languages from the CSV file and print
 # messages by giving the code to the show function.
 
+# Note that we use objects instead of strings because C char arrays are
+# interpreted as bytes, which gives problems
+
 import urllib
 import csv
 import sys
 import os
 
-class HumanLanguage:
+cdef class HumanLanguage(object):
 
     '''Load the contents of the CSV file as a dictionary.'''
 
-    def __init__(self, desired_lang, data_path="languages.csv"):
+    cdef object desired_lang
+    cdef object data_path
+    cdef object t_file
+    cdef object lang_dict
+    cdef object lang
+
+    def __init__(self, object desired_lang, object data_path="languages.csv"):
 
         self.desired_lang = desired_lang
         self.data_path = data_path
@@ -41,16 +50,17 @@ languages.csv\" and save it as {data_path}.")
         self.lang_dict = csv.DictReader(self.t_file, delimiter=",")
         for row in self.lang_dict:
             # Search for the specified language in the CSV file
-            if row["Language"] == self.desired_lang:
+            if bytes(row["Language"], "utf-8") == self.desired_lang:
                 self.lang = row
                 break
         else:  # Executes only if the loop didn't find the language
             print("Couldn't find the specified language.")
             sys.exit(0)
 
-    def show(self, message_id):
-        self.message_id = message_id
+    cdef object message_id
+
+    cpdef void show(self, object message_id):
         try:
-            print(self.lang[self.message_id])
+            print(self.lang[message_id])
         except KeyError:
             print(f'Unrecognized message id: "{message_id}"')
