@@ -50,7 +50,7 @@ languages.csv\" and save it as {data_path}.")
         self.lang_dict = csv.DictReader(self.t_file, delimiter=",")
         for row in self.lang_dict:
             # Search for the specified language in the CSV file
-            if bytes(row["Language"], "utf-8") == self.desired_lang:
+            if row["Language"] == self.desired_lang:
                 self.lang = row
                 break
         else:  # Executes only if the loop didn't find the language
