@@ -4,3 +4,4 @@ __pycache__/
 translations.c*
 translations.so
 build/
+*lock*
