@@ -13,6 +13,7 @@ fi
 echo "Copying files..."
 cp ./main.py $DIRECTORY
 cp ./languages.csv $DIRECTORY
+cp ./translations.so $DIRECTORY
 cp -r ./apps $DIRECTORY
 
 echo "Preparing file to be executed..."
