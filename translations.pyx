@@ -55,7 +55,7 @@ download it...")
                 self.t_file = open(self.data_path, "r")
                 print("Done.")
 
-        # If we get here, that means no urllib didn't raise an exception
+        # If we get here, that means urllib didn't raise an exception
 
         self.lang_dict = csv.DictReader(self.t_file, delimiter=",")
         for row in self.lang_dict:
@@ -79,8 +79,4 @@ download it...")
             return self.lang[message_id]
         except KeyError:
             #print(f'Unrecognized message id: "{message_id}"')
-<<<<<<< HEAD
             return ""
-=======
-            return ""
->>>>>>> 9e5cea481091d91d73787f9fb845d4dd3cd9937b

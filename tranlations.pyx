@@ -13,7 +13,6 @@ from getpass import getuser
 
 from translations import HumanLanguage
 
-version = 2.0 # Just for testing
 
 def command_handler(command):
     # TO-DO: HACER EL SISTEMA DE ARGUMENTOS
@@ -57,27 +56,21 @@ def main():
     user = getuser()
 
     # Detect default language and initialize LoadHumanLanguage class with it
-    syslocale = getdefaultlocale()[0][:2]
+    syslocale = getdefaultlocale()[0][2:]
     try:
         lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
     except KeyError:
         lang = "English"  # Default language
     msg = HumanLanguage(bytes(lang, "utf-8"))
 
-    print("\n"+msg.get("welcome"))
-    print(msg.get("version"), str(version), "\n")
+    print("\n", msg.get('welcome_msg'), "\n")
 
-    try:
-    	while(True):
-        	command_handler(input(f"[{user}@FakeOS]$ "))
-    except KeyboardInterrupt:
-        try:
-             print("\n"+msg.get("close"))
-        except:
-             print("\nLeaving...")
+    while(True):
+        command_handler(input(f"{user}@FakeOS> "))
+
 
 command_dict = {
-    "exit": sys.exit
+    "exit": sys.exit(0)
 }
 
 if __name__ == "__main__":
