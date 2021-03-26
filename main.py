@@ -1,34 +1,29 @@
 #!/usr/bin/env python3
 
-import sys  # Will be widely used in all the program
-import os
-import locale
+# Main module. The commands (see the future commands.py module), menu and
+# configuration are handled here.
 
-import csv  # Used for translation system
-import urllib.request  # Used for downloading data
+from locale import getdefaultlocale
+import sys
 
 from os.path import join as join_dirs
 from os.path import isfile as is_file
 from os.path import isdir as is_dir
-from getpass import getuser  # Used to obtain the username for the shell
+from getpass import getuser
 
 from translations import HumanLanguage
 
-user = getuser()
-
-
-data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
-languages_path = join_dirs(data_path, "languages.csv")
 
 def command_handler(command):
+    # TO-DO: HACER EL SISTEMA DE ARGUMENTOS
     try:
-        returned_value = command_dict[command]()
-        return returned_value
+        return command_dict[command]()  # Return whatever the func returned
     except (KeyError, IndexError, NameError):
-    	try:
-    		exec(f"from apps import {command}")
-    	except ImportError:
-        	print("Sorry, we couldn't recognize that command.")
+        try:
+            exec(f"from apps import {command}")
+        except ImportError:
+            print("Sorry, we couldn't recognize that command.")
+
 
 def sys_command_handler():
     argv = sys.argv[1:]
@@ -51,35 +46,31 @@ def sys_command_handler():
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
-        if command in {"-c", "--command"} \
+        if command in {"-c", "--command"}
         and argv[index + 2] not in {"-c", "--command"}
     )
     return returned_values
 
 
 def main():
-    # Detect default language and initialize LoadHumanLanguage class with it
-    loc = locale.getdefaultlocale()[0]
-    if loc.startswith("en"):
-        l = HumanLanguage("English", languages_path)
-    elif loc.startswith("es"):
-        l = HumanLanguage("Spanish", languages_path)
-    elif loc.startswith("eo"):
-        l = HumanLanguage("Esperanto", languages_path)
-    
-    print(f"\n{l.get('welcome_msg')}\n")
-    
-    while(True):
-        command = input(f"{user}@FakeOS$ ")
-        command_handler(command)
+    user = getuser()
 
-def exit_shell():
-    sys.exit()
+    # Detect default language and initialize LoadHumanLanguage class with it
+    syslocale = getdefaultlocale()[0][2:]
+    try:
+        lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
+    except KeyError:
+        lang = "English"  # Default language
+
+    print("\n", lang.get('welcome_msg'), "\n")
+
+    while(True):
+        command_handler(input(f"{user}@FakeOS> "))
+
 
 command_dict = {
-    "exit": exit_shell
+    "exit": sys.exit(0)
 }
 
 if __name__ == "__main__":
     main()
-
