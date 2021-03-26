@@ -10,13 +10,16 @@ else
 	echo "Directory exists, updating files..."
 fi
 
+echo "Building translations.pyx with Cython..."
+python3 setup.py build_ext --inplace
+
 echo "Copying files..."
 cp ./main.py $DIRECTORY
 cp ./languages.csv $DIRECTORY
 cp ./translations.so $DIRECTORY
 cp -r ./apps $DIRECTORY
 
-echo "Preparing file to be executed..."
+echo "Preparing main file to be executed..."
 mv "$DIRECTORY/main.py" "$DIRECTORY/FakeOS"
 chmod +x "$DIRECTORY/FakeOS"
 
