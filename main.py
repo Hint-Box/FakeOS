@@ -21,6 +21,12 @@ data_path = join_dirs(os.path.expanduser("~"), ".local", "FakeOS")
 languages_path = join_dirs(data_path, "languages.csv")
 
 def command_handler(command):
+    """
+    Execute the command that matches one of those in command_dict
+
+    :param command: The command to be executed
+    :type command: str
+    """
     try:
         returned_value = command_dict[command]()
         return returned_value
@@ -31,22 +37,21 @@ def command_handler(command):
         	print("Sorry, we couldn't recognize that command.")
 
 def sys_command_handler():
+    """
+    Create a generator of the returned values of each func called in the
+    system arguments.
+
+    To add arguments to a function called there, use _ instead of spaces.
+    Example: To call "echo "EOF" >> file.txt":
+    $ python main.py -c echo EOF_>>_file.txt
+
+    If a function doesn't have arguments, use -c again to delimit it.
+    Example: To call "ls":
+    $ python main.py -c ls -c
+    """
     argv = sys.argv[1:]
 
     # NOTA: Mejorar esto
-
-    # Create a generator of the returned values of each function
-    # called in the system arguments
-
-    # To add arguments to a function called there, use _
-    # instead of spaces
-    # Example: To call "echo "EOF" >> file.txt":
-    # $ python main.py -c echo EOF_>>_file.txt
-
-    # If a function doesn't have arguments, use -c again to
-    # delimit it.
-    # Example: To call "ls":
-    # $ python main.py -c ls -c
 
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
@@ -58,7 +63,10 @@ def sys_command_handler():
 
 
 def main():
-    # Detect default language and initialize LoadHumanLanguage class with it
+    """
+    Detect default language and initialize LoadHumanLanguage class with it
+    """
+
     loc = locale.getdefaultlocale()[0]
     if loc.startswith("en"):
         l = HumanLanguage("English", languages_path)
@@ -74,6 +82,7 @@ def main():
         command_handler(command)
 
 def exit_shell():
+    """Close the shell"""
     sys.exit()
 
 command_dict = {
