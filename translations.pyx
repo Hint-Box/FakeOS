@@ -59,8 +59,8 @@ languages.csv\" and save it as {data_path}.")
 
     cdef object message_id
 
-    cpdef object show(self, object message_id):
+    cpdef object get(self, object message_id):
         try:
-            return self.lang_dict[message_id]
+            return self.lang[message_id]
         except KeyError:
             print(f'Unrecognized message id: "{message_id}"')
