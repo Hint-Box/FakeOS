@@ -1,7 +1,14 @@
-#!/usr/bin/env python3
+"""
+Main module. The commands (see the future commands.py module), menu and configuration
+are handled here.
 
-# Main module. The commands (see the future commands.py module), menu and
-# configuration are handled here.
+Functions:
+
+    command_handler(command) -> Optional[Any]
+    sys_command_handler() -> tuple
+    main() -> None
+"""
+#!/usr/bin/env python3
 
 from locale import getdefaultlocale
 import sys
@@ -10,12 +17,22 @@ from os.path import join as join_dirs
 from os.path import isfile as is_file
 from os.path import isdir as is_dir
 from getpass import getuser
+from typing import Optional, Any
 
 from translations import HumanLanguage
 
 
-def command_handler(command):
-    # TO-DO: HACER EL SISTEMA DE ARGUMENTOS
+def command_handler(command: str) -> Optional[Any]:
+    """
+    Execute the command that matches one of those in command_dict.
+
+    :param command: The command to be executed
+    :type command: str
+    :return: The function can return anything the command return or None
+    :rtype: Optional[Any]
+    """
+
+    # TODO: HACER EL SISTEMA DE ARGUMENTOS
     try:
         return command_dict[command]()  # Return whatever the func returned
     except (KeyError, IndexError, NameError):
@@ -25,52 +42,58 @@ def command_handler(command):
             print("Sorry, we couldn't recognize that command.")
 
 
-def sys_command_handler():
+def sys_command_handler() -> tuple:
+    """
+    Create a generator of the returned values of each func called in the
+    system arguments.
+
+    To add arguments to a function called there, use _ instead of spaces.
+    Example: To call "echo "EOF" >> file.txt":
+    $ python main.py -c echo EOF_>>_file.txt
+
+    If a function doesn't have arguments, use -c again to delimit it.
+    Example: To call "ls":
+    $ python main.py -c ls -c
+
+    :return: Return a tuple with the value of each returned vaule of each command called
+    :rtype: tuple
+    """
+
     argv = sys.argv[1:]
 
     # NOTA: Mejorar esto
 
-    # Create a generator of the returned values of each function
-    # called in the system arguments
-
-    # To add arguments to a function called there, use _
-    # instead of spaces
-    # Example: To call "echo "EOF" >> file.txt":
-    # $ python main.py -c echo EOF_>>_file.txt
-
-    # If a function doesn't have arguments, use -c again to
-    # delimit it.
-    # Example: To call "ls":
-    # $ python main.py -c ls -c
-
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
-        if command in {"-c", "--command"}
-        and argv[index + 2] not in {"-c", "--command"}
+        if command in {"-c", "--command"} and argv[index + 2] not in {"-c", "--command"}
     )
     return returned_values
 
 
-def main():
+def main() -> None:
+    """
+    Detect default language and initialize HumanLanguage class with it
+
+    :return: The function don't return anything
+    :rtype: None
+    """
+
     user = getuser()
 
-    # Detect default language and initialize LoadHumanLanguage class with it
     syslocale = getdefaultlocale()[0][2:]
     try:
         lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
     except KeyError:
         lang = "English"  # Default language
 
-    print("\n", lang.get('welcome_msg'), "\n")
+    print("\n", lang.get("welcome_msg"), "\n")
 
-    while(True):
+    while True:
         command_handler(input(f"{user}@FakeOS> "))
 
 
-command_dict = {
-    "exit": sys.exit(0)
-}
+command_dict: dict = {"exit": sys.exit(0)}
 
 if __name__ == "__main__":
     main()
