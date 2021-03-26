@@ -61,8 +61,9 @@ def main():
         lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
     except KeyError:
         lang = "English"  # Default language
+    msg = HumanLanguage(bytes(lang, "utf-8"))
 
-    print("\n", lang.get('welcome_msg'), "\n")
+    print("\n", msg.get('welcome_msg'), "\n")
 
     while(True):
         command_handler(input(f"{user}@FakeOS> "))
