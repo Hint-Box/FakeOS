@@ -49,7 +49,7 @@ Finally, to execute FakeOS use the command `python3 main.py`. Enjoy!
 
 _This repository is a complete rewrite of the [previous version.](https://www.github.com/fabiopolancoe/FakeOS)_
 
-## Credits
+### Credits
 **Fabio** (*fabiopolancoe*): CSV translations file, installation script, general code.
 
 **Sebas** (*Sebastian-byte*): Arguments system, general code.

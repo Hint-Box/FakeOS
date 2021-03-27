@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 """
-Main module. The commands (see the future commands.py module), menu and
-configuration are handled here.
-
 Functions:
-
     command_handler(command) -> Optional[Any]
     sys_command_handler() -> tuple
     main() -> None
@@ -83,7 +79,6 @@ def main() -> None:
 
     user = getuser()
 
-    # Detect default language and initialize LoadHumanLanguage class with it
     syslocale = getdefaultlocale()[0][:2]
     try:
         lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]

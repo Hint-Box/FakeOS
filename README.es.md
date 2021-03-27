@@ -51,7 +51,7 @@ Finalmente, para ejecutar FakeOS utilice el comando `python3 main.py`. ¡Disfrut
 _Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
 
 
-## Créditos
+### Créditos
 **Fabio** (*fabiopolancoe*): Archivo de traducciones CSV, script de instalación, código en general.
 
 **Sebas** (*Sebastian-byte*): Sistema de argumentos, código en general.
