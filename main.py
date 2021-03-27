@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Main module. The commands (see the future commands.py module), menu and configuration
 are handled here.
@@ -8,7 +9,6 @@ Functions:
     sys_command_handler() -> tuple
     main() -> None
 """
-#!/usr/bin/env python3
 
 from locale import getdefaultlocale
 import sys
@@ -21,6 +21,7 @@ from typing import Optional, Any
 
 from translations import HumanLanguage
 
+version = 2.0 # Just for testing
 
 def command_handler(command: str) -> Optional[Any]:
     """
@@ -59,14 +60,11 @@ def sys_command_handler() -> tuple:
     :rtype: tuple
     """
 
-    argv = sys.argv[1:]
-
-    # NOTA: Mejorar esto
-
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
-        if command in {"-c", "--command"} and argv[index + 2] not in {"-c", "--command"}
+        if command in {"-c", "--command"}
+        and argv[index + 2] not in {"-c", "--command"}
     )
     return returned_values
 
@@ -81,19 +79,29 @@ def main() -> None:
 
     user = getuser()
 
-    syslocale = getdefaultlocale()[0][2:]
+    # Detect default language and initialize LoadHumanLanguage class with it
+    syslocale = getdefaultlocale()[0][:2]
     try:
         lang = {"en": "English", "es": "Spanish", "eo": "Esperanto"}[syslocale]
     except KeyError:
         lang = "English"  # Default language
+    msg = HumanLanguage(bytes(lang, "utf-8"))
 
-    print("\n", lang.get("welcome_msg"), "\n")
+    print("\n"+msg.get("welcome"))
+    print(msg.get("version"), str(version), "\n")
 
-    while True:
-        command_handler(input(f"{user}@FakeOS> "))
+    try:
+    	while(True):
+        	command_handler(input(f"[{user}@FakeOS]$ "))
+    except KeyboardInterrupt:
+        try:
+             print("\n"+msg.get("close"))
+        except:
+             print("\nLeaving...")
 
-
-command_dict: dict = {"exit": sys.exit(0)}
+command_dict = {
+    "exit": sys.exit
+}
 
 if __name__ == "__main__":
     main()
