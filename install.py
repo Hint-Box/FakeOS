@@ -19,10 +19,10 @@ else:
 
 print("Checking if config folder exists...")
 if not os.path.exists(config_path):
-    print("Data folder doesn't exist, creating...")
+    print("Config folder doesn't exist, creating...")
     os.makedirs(config_path)
 else:
-    print("Data folder exists, updating content...")
+    print("Config folder exists, updating content...")
 
 print("Building translations.pyx with Cython")
 plt = sys.platform
