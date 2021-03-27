@@ -36,7 +36,7 @@ Si funcionó correctamente, un archivo llamado *"translations.[INFO_DE_SU_SO].so
 haber sido creado en el directorio donde se encuentra (también se creará un directorio llamado
 *"build"* y un archivo llamado *"translations.c"*, pero no son relevantes).
 
-Finalmente, para ejecutar FakeOS utilice el comando `python main.py`. ¡Disfrute!
+Finalmente, para ejecutar FakeOS utilice el comando `python3 main.py`. ¡Disfrute!
 
 ## Información adicional
 **Estado**: En desarrollo, incompleto
@@ -45,7 +45,7 @@ Finalmente, para ejecutar FakeOS utilice el comando `python main.py`. ¡Disfrute
 
 **Sistema Operativo**: GNU/Linux, FreeBSD, UNIX
 
-_Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
+_Este repositorio es una reimplementación completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
 
 
 ## Créditos
