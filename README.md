@@ -27,7 +27,7 @@ Ahora, se necesita compilar el archivo `translations.pyx` incluido con la descar
 Para esto, guíese con esta tabla:
 
 |Cython instalado con pip|Cython instalado con el ADP|
-|----------------------------------------------------|
+|---|---|
 |`python setup.py build_ext --inplace`|`cythonize -i translations.pyx`|
 
 Si funcionó correctamente, un archivo llamado *"translations.[NOMBRE_DE_SU_DISTRO].so"* debió
@@ -37,9 +37,10 @@ haber sido creado en el directorio donde se encuentra (también se creará un di
 Finalmente, para ejecutar FakeOS utilice el comando `python main.py`. ¡Disfrute!
 
 ## Información adicional:
-----------------------------------------------------
 |Estado|En desarrollo, incompleto|
+|---|---|
 |Dependencias|Python 3.8.9+, Cython, pip (opcional), git (opcional)|
+|---|---|
 |S.O.|GNU/Linux, FreeBSD, UNIX|
 
 _Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
@@ -47,7 +48,10 @@ _Este repositorio es una reescritura completa de la [versión anterior.](https:/
 
 ## Créditos
 Fabio (fabiopolancoe): Archivo de traducciones CSV, script de instalación, código en general
+
 Sebas (Sebastian-byte): Sistema de argumentos, código en general
+
 FRostri (Rubén Zamora): Documentación, lenguaje de scripting, código en general
+
 Suaj (SuajCarrot): Optimización con Cython, código en general
 
