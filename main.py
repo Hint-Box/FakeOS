@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 """
-Main module. The commands (see the future commands.py module), menu and configuration
-are handled here.
-
 Functions:
-
     command_handler(command) -> Optional[Any]
     sys_command_handler() -> tuple
     main() -> None
@@ -21,7 +17,8 @@ from typing import Optional, Any
 
 from translations import HumanLanguage
 
-version = 2.0 # Just for testing
+version = 2.0  # Just for testing
+
 
 def command_handler(command: str) -> Optional[Any]:
     """
@@ -56,9 +53,12 @@ def sys_command_handler() -> tuple:
     Example: To call "ls":
     $ python main.py -c ls -c
 
-    :return: Return a tuple with the value of each returned vaule of each command called
+    :return: Return a tuple with the value of each returned vaule of each
+    command called
     :rtype: tuple
     """
+
+    argv = sys.argv[:1]
 
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
@@ -91,13 +91,12 @@ def main() -> None:
     print(msg.get("version"), str(version), "\n")
 
     try:
-    	while(True):
-        	command_handler(input(f"[{user}@FakeOS]$ "))
+        while(True):
+            command_handler(input(f"[{user}@FakeOS]$ "))
     except KeyboardInterrupt:
-        try:
-             print("\n"+msg.get("close"))
-        except:
-             print("\nLeaving...")
+        print("\n"+msg.get("close"))
+        sys.exit(0)
+
 
 command_dict = {
     "exit": sys.exit
