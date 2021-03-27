@@ -19,7 +19,7 @@ no es que ya tiene Python instalado.
 A continuación, se llevará a cabo la instalación de Cython. Si cuenta con el administrador de
 paquetes de Python *pip*, utilice el comando `pip install cython`. Si no, use su administrador de
 paquetes integrado con su distribución de la misma forma que se mostró anteriormente,
-sustituyendo *"python"* por *"pip"*.
+sustituyendo *"python"* por *"python-pip"*.
 
 ### Instalación de FakeOS
 ¡Enhorabuena! Ya cuenta con las dependencias necesarias para usar FakeOS, ahora el proceso de

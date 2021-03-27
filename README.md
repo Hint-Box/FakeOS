@@ -18,7 +18,7 @@ do not already have Python installed.
 
 Next, the Cython installation will be performed. If you have the *pip* Python package
 manager, use the `pip install cython` command. If you don't, use your distribution's default
-package manager in the same way as shown above, replacing *"python"* with *"pip"*.
+package manager in the same way as shown above, replacing *"python"* with *"python-pip"*.
 
 ### FakeOS installation
 Congratulations! Now you have the necessary dependencies to use FakeOS, now comes the
