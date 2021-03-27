@@ -1,6 +1,6 @@
 # FakeOS
 
-* [Spanish](https://github.com/Hint-Box/FakeOS/blob/main/README.es.md)
+* [Español](https://github.com/Hint-Box/FakeOS/blob/main/README.es.md)
 
 An user-friendly terminal **simulator** whose purpose is to teach new users about the use of
 real terminals (mainly UNIX systems), designed with scalability in mind from the

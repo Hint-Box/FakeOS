@@ -1,11 +1,10 @@
 # FakeOS
 
-- [Ingles](https://github.com/Hint-Box/FakeOS/blob/main/README.md)
-- Español
+- [English](https://github.com/Hint-Box/FakeOS/blob/main/README.md)
 
 Un **simulador** de terminal amigable cuyo propósito es enseñar a los usuarios nuevos sobre el uso
-de terminales reales (principalmente de sistemas UNIX), diseñado con la escalabilidad desde un
-principio para garantizar la longevidad del proyecto.
+de terminales reales (principalmente de sistemas UNIX), diseñado con la escalabilidad en mente desde
+un inicio para garantizar la longevidad del proyecto.
 
 # Instalación
 Para instalar la versión actual de FakeOS, necesitará Python 3.8.9+ y Cython.
@@ -49,7 +48,7 @@ Finalmente, para ejecutar FakeOS utilice el comando `python3 main.py`. ¡Disfrut
 
 **Sistema Operativo**: GNU/Linux, FreeBSD, UNIX.
 
-_Este repositorio es una reimplementación completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
+_Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
 
 
 ## Créditos
