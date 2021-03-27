@@ -1,59 +1,59 @@
 # FakeOS
 
-Un **simulador** de terminal amigable cuyo propósito es enseñar a los usuarios nuevos sobre el uso
-de terminales reales (principalmente de sistemas UNIX), diseñado con la escalabilidad desde un
-principio para garantizar la longevidad del proyecto.
+* [Español](https://github.com/Hint-Box/FakeOS/blob/main/README.es.md)
 
-# Instalación
-Para instalar la versión actual de FakeOS, necesitará Python 3.8.9+ y Cython.
+An user-friendly terminal **simulator** whose purpose is to teach new users about the use of
+real terminals (mainly UNIX systems), designed with scalability in mind from the
+beginning to ensure the longevity of the project.
 
-#### Instalación de dependencias
-Para sistemas GNU/Linux, utilice el administrador de paquetes que venga con su distribución, si
-no es que ya tiene Python instalado.
+# Installation
+To install the lastest version of FakeOS, you will need Python 3.8.9+ and Cython.
 
-* Distribuciones basadas en Debian: `sudo apt upgrade & sudo apt install python & sudo apt update`
-* Distribuciones basadas en Arch: `sudo pacman -Syu & sudo pacman -S python`
+### Dependencies installation
+For GNU/Linux systems, use the package manager that your distribution provides, if you
+do not already have Python installed.
 
-A continuación, se llevará a cabo la instalación de Cython. Si cuenta con el administrador de
-paquetes de Python *pip*, utilice el comando `pip install cython`. Si no, use su administrador de
-paquetes integrado con su distribución de la misma forma que se mostró anteriormente,
-sustituyendo *"python"* por *"pip"*.
+* Debian-based distributions: `sudo apt upgrade && sudo apt install python3 && sudo apt update`
+* Arch-based distributions: `sudo pacman -Syu && sudo pacman -S python3`
 
-#### Instalación de FakeOS
-¡Enhorabuena! Ya cuenta con las dependencias necesarias para usar FakeOS, ahora el proceso de
-instalación dle mismo
+Next, the Cython installation will be performed. If you have the *pip* Python package
+manager, use the `pip install cython` command. If you don't, use your distribution's default
+package manager in the same way as shown above, replacing *"python"* with *"pip"*.
 
-Primero, descargue la [versión actual del programa](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip "Download Link") y extraiga el archivo *zip* al directorio de su preferencia.
+### FakeOS installation
+Congratulations! Now you have the necessary dependencies to use FakeOS, now comes the
+installation process.
 
-Ahora, se necesita compilar el archivo `translations.pyx` incluido con la descarga.
-Para esto, guíese con esta tabla:
+First, download the [lastest version of the program](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip "Download Link")
+and extract the *zip* file to the directory of your choice.
 
-|Cython instalado con pip|Cython instalado con el A.D.P.|
+Now, you need to compile the `translations.pyx` file included with the download. To do this,
+check this table:
+
+|Cython installed with pip|Cython installed with the P.M.|
 |---|---|
 |`python setup.py build_ext --inplace`|`cythonize -i translations.pyx`|
 
-Si funcionó correctamente, un archivo llamado *"translations.[INFO_DE_SU_SO].so"* debió
-haber sido creado en el directorio donde se encuentra (también se creará un directorio llamado
-*"build"* y un archivo llamado *"translations.c"*, pero no son relevantes).
+If it worked properly, you should see a file named *"translations.[YOUR_OS_INFO].so"* in
+the directory where you are located (a directory called *"build"* and a file called
+*"translations.c"* will also be created, but they are not relevant).
 
-Finalmente, para ejecutar FakeOS utilice el comando `python main.py`. ¡Disfrute!
+Finally, to execute FakeOS use the command `python3 main.py`. Enjoy!
 
-## Información adicional
-**Estado**: En desarrollo, incompleto
+## Additional information
+**Status**: In development, incomplete.
 
-**Dependencias**: Python 3.8.9+, Cython 0.29.2+, pip3 (opcional)
+**Dependencies**: Python 3.8.9+, Cython 0.29.2+, pip3 (optional).
 
-**Sistema Operativo**: GNU/Linux, FreeBSD, UNIX
+**Operative System**: GNU/Linux, FreeBSD, UNIX.
 
-_Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
+_This repository is a complete rewrite of the [previous version.](https://www.github.com/fabiopolancoe/FakeOS)_
 
+## Credits
+**Fabio** (*fabiopolancoe*): CSV translations file, installation script, general code.
 
-## Créditos
-**Fabio** (*fabiopolancoe*): Archivo de traducciones CSV, script de instalación, código en general
+**Sebas** (*Sebastian-byte*): Arguments system, general code.
 
-**Sebas** (*Sebastian-byte*): Sistema de argumentos, código en general
+**FRostri** (*Rubén Zamora*): Documentation, scripting language, general code.
 
-**FRostri** (*Rubén Zamora*): Documentación, lenguaje de scripting, código en general
-
-**Suaj** (*SuajCarrot*): Optimización con Cython, código en general
-
+**Suaj** (*SuajCarrot*): Cython optimization, general code.
