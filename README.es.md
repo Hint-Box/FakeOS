@@ -9,7 +9,7 @@ un inicio para garantizar la longevidad del proyecto.
 # Instalación
 Para instalar la versión actual de FakeOS, necesitará Python 3.8.9+ y Cython.
 
-#### Instalación de dependencias
+### Instalación de dependencias
 Para sistemas GNU/Linux, utilice el administrador de paquetes que venga con su distribución, si
 no es que ya tiene Python instalado.
 
@@ -21,7 +21,7 @@ paquetes de Python *pip*, utilice el comando `pip install cython`. Si no, use su
 paquetes integrado con su distribución de la misma forma que se mostró anteriormente,
 sustituyendo *"python"* por *"pip"*.
 
-#### Instalación de FakeOS
+### Instalación de FakeOS
 ¡Enhorabuena! Ya cuenta con las dependencias necesarias para usar FakeOS, ahora el proceso de
 instalación del mismo.
 
@@ -51,7 +51,7 @@ Finalmente, para ejecutar FakeOS utilice el comando `python3 main.py`. ¡Disfrut
 _Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
 
 
-## Créditos
+### Créditos
 **Fabio** (*fabiopolancoe*): Archivo de traducciones CSV, script de instalación, código en general.
 
 **Sebas** (*Sebastian-byte*): Sistema de argumentos, código en general.

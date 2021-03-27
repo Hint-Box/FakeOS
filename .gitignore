@@ -1,14 +1,21 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / Optimized / DLL files
 __pycache__/
 .mypy_cache/
 *.py[cod]
 *$py.class
 
 # C extensions
-*.so
+*.cpp
 *.c
 
-# Distribution / packaging
+# HTML Cython file
+translations.html
+
+# Shared Objects
+*.dll
+*.so
+
+# Distribution / Packaging
 .Python
 build/
 develop-eggs/
@@ -130,4 +137,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Logs
 log.txt
