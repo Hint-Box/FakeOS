@@ -1,7 +1,0 @@
-log.txt
-.mypy_cache
-__pycache__/
-translations.c*
-translations.so
-build/
-*lock*

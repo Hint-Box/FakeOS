@@ -60,11 +60,14 @@ def sys_command_handler() -> tuple:
     :rtype: tuple
     """
 
+    argv = sys.argv[1:]
+
+    # NOTA: Mejorar esto
+
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
-        if command in {"-c", "--command"}
-        and argv[index + 2] not in {"-c", "--command"}
+        if command in {"-c", "--command"} and argv[index + 2] not in {"-c", "--command"}
     )
     return returned_values
 
