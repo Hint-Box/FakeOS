@@ -2,14 +2,12 @@
 
 from os.path import expanduser as get_home
 from os.path import join as join_dirs
-from os.path import isfile as is_file
 from os.path import isdir as is_dir
-from setuptools import setup
 import configparser
 import sys
 import os
 
-print("Welcome to FakeOS Installer")
+print("\nWelcome to the FakeOS Installer\n")
 
 
 def install_fakeos():
@@ -44,13 +42,13 @@ def install_fakeos():
 
     print("Copying files...")
     commands = (
-        f"cp -f ./main.py {data_dir}",
-        f"cp -f ./languages.csv {data_dir}",
-        f"cp -f ./translations.cpython*.so {data_dir}",
-        f"cp -f -r ./apps {data_dir}",
+        f"cp -fv main.py {data_dir}",
+        f"cp -fv languages.csv {data_dir}",
+        f"cp -fv translations.*.so {data_dir}",
+        f"cp -fvr apps {data_dir}",
         f"mv {data_dir}/main.py {data_dir}/FakeOS",
         f"chmod +x {data_dir}/FakeOS",
-        f"cp -f ./FakeOS.conf {config_dir}"
+        f"cp -fv FakeOS.conf {config_dir}"
     )
     try:
         for command in commands:
@@ -60,5 +58,5 @@ def install_fakeos():
         sys.exit(0)
     else:
         print(f'Please add the "{data_dir}" directory to your PATH.')
-        print("If you don't know how to do it, visit https://www.cyberciti.biz\
-/faq/how-to-add-to-bash-path-permanently-on-linux/")
+        print('If you don"t know how to do it, visit "https://www.cyberciti.biz\
+/faq/how-to-add-to-bash-path-permanently-on-linux/"')
