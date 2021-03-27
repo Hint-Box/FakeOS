@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 # Translation module, used to load the languages from the CSV file and print
 # messages by giving the code to the show function.
 
