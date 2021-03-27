@@ -11,8 +11,8 @@ Para instalar la versión actual de FakeOS, necesitará Python 3.8.9+ y Cython.
 Para sistemas GNU/Linux, utilice el administrador de paquetes que venga con su distribución, si
 no es que ya tiene Python instalado.
 
-* Distribuciones basadas en Debian: `sudo apt upgrade & sudo apt install python & sudo apt update`
-* Distribuciones basadas en Arch: `sudo pacman -Syu & sudo pacman -S python`
+* Distribuciones basadas en Debian: `sudo apt upgrade & sudo apt install python3 & sudo apt update`
+* Distribuciones basadas en Arch: `sudo pacman -Syu & sudo pacman -S python3`
 
 A continuación, se llevará a cabo la instalación de Cython. Si cuenta con el administrador de
 paquetes de Python *pip*, utilice el comando `pip install cython`. Si no, use su administrador de
