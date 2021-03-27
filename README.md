@@ -18,15 +18,17 @@ paquetes de Python *pip*, utilice el comando `pip install cython`. Si no, use su
 paquetes integrado con su distribución de la misma forma que se mostró anteriormente,
 sustituyendo *"python"* por *"pip"*.
 
+---
+
 ¡Enhorabuena! Ya cuenta con las dependencias necesarias para usar FakeOS, ahora el proceso de
 instalación del mismo.
 
-Primero, descargue la [versión actual del programa.](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip) y extraiga el archivo *zip* al directorio de su preferencia.
+Primero, descargue la [versión actual del programa](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip "Download Link") y extraiga el archivo *zip* al directorio de su preferencia.
 
 Ahora, se necesita compilar el archivo `translations.pyx` incluido con la descarga.
 Para esto, guíese con esta tabla:
 
-|Cython instalado con pip|Cython instalado con el ADP|
+|Cython instalado con pip|Cython instalado con el A.D.P.|
 |---|---|
 |`python setup.py build_ext --inplace`|`cythonize -i translations.pyx`|
 
@@ -37,21 +39,19 @@ haber sido creado en el directorio donde se encuentra (también se creará un di
 Finalmente, para ejecutar FakeOS utilice el comando `python main.py`. ¡Disfrute!
 
 ## Información adicional:
-|Estado|En desarrollo, incompleto|
-|---|---|
-|Dependencias|Python 3.8.9+, Cython, pip (opcional), git (opcional)|
-|---|---|
-|S.O.|GNU/Linux, FreeBSD, UNIX|
+**Estado**: En desarrollo, incompleto
+**Dependencias**: Python 3.8.9+, Cython 0.29.2+, pip3 (opcional)
+**Sistema Operativo**: GNU/Linux, FreeBSD, UNIX
 
 _Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
 
 
 ## Créditos
-Fabio (fabiopolancoe): Archivo de traducciones CSV, script de instalación, código en general
+**Fabio** (*fabiopolancoe*): Archivo de traducciones CSV, script de instalación, código en general
 
-Sebas (Sebastian-byte): Sistema de argumentos, código en general
+**Sebas** (*Sebastian-byte*): Sistema de argumentos, código en general
 
-FRostri (Rubén Zamora): Documentación, lenguaje de scripting, código en general
+**FRostri** (*Rubén Zamora*): Documentación, lenguaje de scripting, código en general
 
-Suaj (SuajCarrot): Optimización con Cython, código en general
+**Suaj** (*SuajCarrot*): Optimización con Cython, código en general
 
