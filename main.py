@@ -16,11 +16,14 @@ try:
 except ModuleNotFoundError:
     try:  # Use pyximport to automatically compile the Cython modules
         import pyximport
+
         pyximport.install()
         from translations import HumanLanguage
-    except Exception as id:
-        print("FATAL ERROR: Could not load the Cython modules required to run\
-the program. Try compiling them manually.")
+    except ImportError as id:
+        print(
+            "FATAL ERROR: Could not load the Cython modules required to run\
+the program. Try compiling them manually."
+        )
         print(f"Exception Details: {id}")
 
 version = 2.0  # Just for testing
@@ -69,8 +72,7 @@ def sys_command_handler() -> tuple:
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
-        if command in {"-c", "--command"}
-        and argv[index + 2] not in {"-c", "--command"}
+        if command in {"-c", "--command"} and argv[index + 2] not in {"-c", "--command"}
     )
     return returned_values
 
@@ -92,19 +94,19 @@ def main() -> None:
         lang = "English"  # Default language
     msg = HumanLanguage(bytes(lang, "utf-8"))
 
-    print("\n"+msg.get("welcome"))
+    print("\n" + msg.get("welcome"))
     print(msg.get("version"), str(version), "\n")
 
     try:
-        while(True):
+        while True:
             command_handler(input(f"[{user}@FakeOS]$ "))
     except KeyboardInterrupt:
-        print("\n"+msg.get("close"))
+        print("\n" + msg.get("close"))
         sys.exit(0)
 
 
 command_dict = {
-    "exit": sys.exit
+    "exit": sys.exit,
 }
 
 if __name__ == "__main__":
