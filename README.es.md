@@ -25,11 +25,15 @@ sustituyendo *"python"* por *"python-pip"*.
 ¡Enhorabuena! Ya cuenta con las dependencias necesarias para usar FakeOS, ahora el proceso de
 instalación del mismo.
 
-Primero, descargue la [versión actual del programa](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip "Download Link")
+Descargue la [versión actual del programa](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip "Download Link")
 y extraiga el archivo *zip* al directorio de su preferencia.
 
-Ahora, se necesita compilar el archivo `translations.pyx` incluido con la descarga.
-Para esto, guíese con esta tabla:
+Finalmente, para ejecutar FakeOS utilice el comando `python3 main.py`. ¡Disfrute!
+
+### Compilación manual de los módulos de Cython
+Si está teniendo problemas con la ejecución de FakeOS, puede que tenga que compilar los módulos
+de Cython manualmente. Para esto, abra una terminal, navege hacia el directorio donde tenga su
+instalación y ejecute los comandos necesarios. Para esto, guíese con esta tabla:
 
 |Cython instalado con pip|Cython instalado con el A.D.P.|
 |---|---|
@@ -37,14 +41,15 @@ Para esto, guíese con esta tabla:
 
 Si funcionó correctamente, un archivo llamado *"translations.[INFO_DE_SU_SO].so"* debió
 haber sido creado en el directorio donde se encuentra (también se creará un directorio llamado
-*"build"* y un archivo llamado *"translations.c"*, pero no son relevantes).
+*"build"* y un archivo llamado *"translations.c"*, pero no son relevantes y pueden ser eliminados
+con total seguridad.).
 
-Finalmente, para ejecutar FakeOS utilice el comando `python3 main.py`. ¡Disfrute!
+---
 
 ## Información adicional
 **Estado**: En desarrollo, incompleto.
 
-**Dependencias**: Python 3.8.9+, Cython 0.29.2+, pip3 (opcional).
+**Dependencias**: Python 3.8.9+, Cython 0.29.2+, un compilador de C/C++, pip3 (opcional).
 
 **Sistema Operativo**: GNU/Linux, FreeBSD, UNIX.
 

@@ -7,15 +7,21 @@ Functions:
 """
 
 from locale import getdefaultlocale
+from typing import Optional, Any
+from getpass import getuser
 import sys
 
-from os.path import join as join_dirs
-from os.path import isfile as is_file
-from os.path import isdir as is_dir
-from getpass import getuser
-from typing import Optional, Any
-
-from translations import HumanLanguage
+try:
+    from translations import HumanLanguage
+except ModuleNotFoundError:
+    try:  # Use pyximport to automatically compile the Cython modules
+        import pyximport
+        pyximport.install()
+        from translations import HumanLanguage
+    except Exception as id:
+        print("FATAL ERROR: Could not load the Cython modules required to run\
+the program. Try compiling them manually.")
+        print(f"Exception Details: {id}")
 
 version = 2.0  # Just for testing
 

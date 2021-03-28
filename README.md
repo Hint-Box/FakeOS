@@ -21,29 +21,33 @@ manager, use the `pip install cython` command. If you don't, use your distributi
 package manager in the same way as shown above, replacing *"python"* with *"python-pip"*.
 
 ### FakeOS installation
-Congratulations! Now you have the necessary dependencies to use FakeOS, now comes the
+Congratulations! You now have the necessary dependencies to use FakeOS, now comes the
 installation process.
 
-First, download the [latest version of the program](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip "Download Link")
+Download the [latest version of the program](https://www.github.com/Hint-Box/FakeOS/archive/refs/heads/main.zip "Download Link")
 and extract the *zip* file to the directory of your choice.
 
-Now, you need to compile the `translations.pyx` file included with the download. To do this,
-check this table:
+Finally, to execute FakeOS use the command `python3 main.py`. Enjoy!
+
+### Manual compilation of the Cython modules
+If you're having trouble executing FakeOS, you may have to compile the Cython modules manually.
+To do this, open a terminal, go to the directory where your installation is located and enter the
+required commands. Guide yourself with this table:
 
 |Cython installed with pip|Cython installed with the P.M.|
 |---|---|
 |`python setup.py build_ext --inplace`|`cythonize -i translations.pyx`|
 
-If it worked properly, you should see a file named *"translations.[YOUR_OS_INFO].so"* in
-the directory where you are located (a directory called *"build"* and a file called
-*"translations.c"* will also be created, but they are not relevant).
+If it worked properly, you should see a file named *"translations.[YOUR_OS_INFO].so"* in the
+directory where you are located (a directory called *"build"* and a file called *"translations.c"*
+will also be created, but they are not relevant and can safely be deleted).
 
-Finally, to execute FakeOS use the command `python3 main.py`. Enjoy!
+---
 
 ## Additional information
 **Status**: In development, incomplete.
 
-**Dependencies**: Python 3.8.9+, Cython 0.29.2+, pip3 (optional).
+**Dependencies**: Python 3.8.9+, Cython 0.29.2+, a C/C++ compiler, pip3 (optional)
 
 **Operative System**: GNU/Linux, FreeBSD, UNIX.
 
