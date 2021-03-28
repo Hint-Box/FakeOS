@@ -20,10 +20,8 @@ except ModuleNotFoundError:
         pyximport.install()
         from translations import HumanLanguage
     except ImportError as id:
-        print(
-            "FATAL ERROR: Could not load the Cython modules required to run\
-the program. Try compiling them manually."
-        )
+        print("FATAL ERROR: Could not load the Cython modules required to run\
+the program. Try compiling them manually.")
         print(f"Exception Details: {id}")
 
 version = 2.0  # Just for testing
@@ -72,7 +70,8 @@ def sys_command_handler() -> tuple:
     returned_values = (
         command_handler(argv[index + 1], *argv[index + 2].split("_"))
         for index, command in enumerate(argv)
-        if command in {"-c", "--command"} and argv[index + 2] not in {"-c", "--command"}
+        if command in {"-c", "--command"}\
+        and argv[index + 2] not in {"-c", "--command"}
     )
     return returned_values
 

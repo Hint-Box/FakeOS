@@ -24,7 +24,7 @@ def install_fakeos():
         print("Data directory doesn't exist, creating it...")
         os.makedirs(data_dir)
 
-    print("Checking if bin directory existes...")
+    print("Checking if bin directory exists...")
     if is_dir(bin_dir):
         print("Bin directory exists, updating content...")
     else:
@@ -43,10 +43,8 @@ def install_fakeos():
         try:
             os.system("python3 setup.py build_ext --inplace")
         except OSError:
-            print(
-                "An exception occurred during the building process... Try to\
-                install the necessary requirements dictated in the readme."
-            )
+            print("An exception occurred during the building process... Try to\
+install the necessary requirements dictated in the readme.")
             sys.exit(0)
     else:
         print("Your platform is not currently supported!")
@@ -71,9 +69,7 @@ def install_fakeos():
     else:
         print(
             f'Please add the "{bin_dir}" directory to your PATH if you don\'t\
-            already have it.'
-        )
+already have it.')
         print(
             'If you don\'t know how to do it, visit "https://www.cyberciti.biz\
-/faq/how-to-add-to-bash-path-permanently-on-linux/"'
-        )
+/faq/how-to-add-to-bash-path-permanently-on-linux/"')
