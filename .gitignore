@@ -4,10 +4,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.cpp
-*.c
-
 # HTML Cython file
 translations.html
 

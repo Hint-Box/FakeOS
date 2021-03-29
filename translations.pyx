@@ -20,8 +20,8 @@ cdef class HumanLanguage:
 
     cdef char* desired_lang
     cdef char* data_path
-    cdef object t_file  # File Object
-    cdef object lang_dict  # csv.DictReader
+    cdef object t_file  # File object
+    cdef object lang_dict  # csv.DictReader object
     cdef dict lang
     cdef dict row
 
@@ -75,5 +75,4 @@ download it...")
         try:
             return self.lang[message_id]
         except KeyError:
-            #print(f'Unrecognized message id: "{message_id}"')
             return ""
