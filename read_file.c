@@ -5,48 +5,48 @@
  * The code here will later be translated to Cython.
  */
 
-int main(void) {
+int main(void)
+{
   FILE *csv_file;
-  char char_from_file, *file_path = malloc(500 * sizeof(char));
-  unsigned int file_size;
+  char char_from_file, *mem_for_str = malloc(4096 * sizeof (char));
+  unsigned int len_mem_for_str, num_of_chars = 0;
 
   printf("Enter the file path: ");
-  scanf("%s", file_path);
+  scanf("%s", mem_for_str);
 
-  printf("Opening %s...\n", file_path);
+  printf("Opening %s...\n", mem_for_str);
+  csv_file = fopen(mem_for_str, "r");
 
-  csv_file = fopen(file_path, "r");
-  if (csv_file == NULL) {
-    printf("ERROR: Could not open the specified file.");
+  if (csv_file == NULL)
+  {
+    printf("ERROR: Could not open the file.\n");
     exit(0);
   }
 
-  free(file_path);  // Free the memory of file_path
-
-  // Get the size of the file in characters to allocate memory for the array
-  file_size = 0;
-  while (fgetc(csv_file) != EOF) {
-    file_size++;
-  }
-
-  printf("The file has %d characters\n", file_size);
-
-  // Store the contents of the file and print each character
-  char file_content[file_size];
+  while (fgetc(csv_file) != EOF) num_of_chars++;
   fseek(csv_file, 0, SEEK_SET);
+  printf("The file has %d characters.\n", num_of_chars);
 
-  for (unsigned short i = 0; i < file_size; i++) {
-    char_from_file = fgetc(csv_file);
+  len_mem_for_str = num_of_chars * sizeof(char)
+  mem_for_str = realloc(mem_for_str, len_mem_for_str);
 
-    if (char_from_file != EOF) {
-      file_content[i] = char_from_file;
-      printf("%c", file_content[i]);
-    }
-    else {
-      break;
-    }
+  if (mem_for_str == NULL) {
+    printf("ERROR: Could not allocate enough memory for pointer of type char.");
+    exit(0);
   }
-  fclose(csv_file);
+
+  for (unsigned int i = 0; i < len_mem_for_str; i++)
+  {
+    char_from_file = fgetc(csv_file);
+    if (char_from_file != EOF)
+    {
+      mem_for_str[i] = char_from_file;
+      printf("%c", char_from_file);
+    }
+    else break;
+  }
+
+  printf("\nFinalized.\n");
 
   return 0;
 }
