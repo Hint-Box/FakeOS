@@ -7,6 +7,9 @@ __pycache__/
 # HTML Cython file
 translations.html
 
+# Compiled folder
+Compiled/
+
 # Shared Objects
 *.dll
 *.so

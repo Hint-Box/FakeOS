@@ -55,6 +55,7 @@ int main(void) {
   }
 
   // End of the program
+  fclose(csv_file);
   printf("\nFinalized.\n");
   return 0;
 }
