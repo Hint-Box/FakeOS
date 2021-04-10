@@ -13,8 +13,9 @@ Para instalar la versión actual de FakeOS, necesitará Python 3.8.9+ y Cython.
 Para sistemas GNU/Linux, utilice el administrador de paquetes que venga con su distribución, si
 no es que ya tiene Python instalado.
 
-* Distribuciones basadas en Debian: `sudo apt upgrade && sudo apt install python3 && sudo apt update`
-* Distribuciones basadas en Arch: `sudo pacman -Syu && sudo pacman -S python3`
+|Distribuciones basadas en Debian|Distribuciones basadas en Arch|
+|---|---|
+|`sudo apt upgrade && sudo apt install python3 && sudo apt update`||`sudo pacman -Syu && sudo pacman -S python3`
 
 A continuación, se llevará a cabo la instalación de Cython. Si cuenta con el administrador de
 paquetes de Python *pip*, utilice el comando `pip install cython`. Si no, use su administrador de
@@ -47,20 +48,20 @@ con total seguridad.).
 ---
 
 ## Información adicional
-**Estado**: En desarrollo, incompleto.
+**Estado**: En desarrollo, incompleto
 
-**Dependencias**: Python 3.8.9+, Cython 0.29.2+, un compilador de C/C++, pip3 (opcional).
+**Dependencias**: Python 3.8.9+, Cython 0.29.2+, un compilador de C/C++, pip3 (opcional)
 
-**Sistema Operativo**: GNU/Linux, FreeBSD, UNIX.
+**Sistema Operativo**: GNU/Linux, FreeBSD, UNIX
 
 _Este repositorio es una reescritura completa de la [versión anterior.](https://www.github.com/fabiopolancoe/FakeOS)_
 
 
 ### Créditos
-**Fabio** (*fabiopolancoe*): Archivo de traducciones CSV, script de instalación, código en general.
+**Fabio** (*fabiopolancoe*): Archivo de traducciones CSV, script de instalación, código en general
 
-**Sebas** (*Sebastian-byte*): Sistema de argumentos, código en general.
+**Sebas** (*Sebastian-byte*): Sistema de argumentos, código en general
 
-**FRostri** (*Rubén Zamora*): Documentación, lenguaje de scripting, código en general.
+**FRostri** (*Rubén Zamora*): Documentación, lenguaje de scripting, código en general
 
-**Suaj** (*SuajCarrot*): Optimización con Cython, código en general.
+**Suaj** (*SuajCarrot*): Optimización con Cython, código en general
